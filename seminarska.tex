@@ -1,0 +1,104 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage[slovene]{babel}      % Slovenian language support
+\geometry{a4paper, margin=1in}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{caption}
+\usepackage{cite}
+
+% Define the definition environment
+\newtheorem{definition}{Definicija}
+\newtheorem{lemma}{Lema}
+% Define custom environment based on 'proof'
+% \newtheorem{proof}{Dokaz}
+
+
+
+
+% % Title formatting
+\titleformat{\section}{\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+
+% Metadata
+\title{\textbf{Bernsteinovi bazni polinomi treh spremenljivk}}
+\author{Nejc Jenko, Petja Murnik}
+% \author{Petja Murnik}
+\date{\today}
+
+\begin{document}
+
+% Title Page
+\maketitle
+\break
+% \begin{abstract}
+% This is the abstract of your article. Write a concise summary of the purpose, methodology, results, and conclusions here.
+% \end{abstract}
+
+\section{Uvod}
+
+Pri predavanjih predmeta RPGO smo obravnavali Bernsteinove bazne polinome ene
+ter dveh spremenljivk, ki smo jih uporabili pri različnih aplikacijah pri numerični matematiki.
+V tem delu bomo predstavili Bernsteinove bazne polinome treh spremenljivk, ki so 
+razširitev prej omenjenih. 
+
+\section{Prostor polinomov treh spremenljivk} 
+
+\begin{definition}\label{def_prostor}
+    Naj bo $n \in \mathbb{N}_0$. Prostor polinomov treh spremenljivk stopnje $n$ je definiran kot
+    \begin{equation}
+        \mathbb{P}_n = \left\{ \sum_{0 \le i  + j + k \le n} a_{ijk} x^i y^j z^k  ; a_{ijk} \in \mathbb{R}\right\}.
+    \end{equation}
+\end{definition}
+
+\begin{lemma}
+    Naj bo $\mathbb{P}_n$ kot v definiciji \ref{def_prostor}.
+    Potem je $\dim \mathbb{P}_n = \binom{n+3}{3} $. 
+    Nadalje monomi $\left\{x^i y^j z^k \right\}_{0 \le i  + j + k \le n}$ tvorijo njegovo bazo.
+\end{lemma}
+
+Preden se lotimo dokaza leme, vpeljimo noticajo odvodov, 
+ki nam ba prišla prav tako pri dokazu kot tudi 
+v nadaljevanju. Naj bo $\text{D}^l_w$ operator parcialniega odvoda po
+spremenljivki $w$ reda $l$. Potem definiramo 
+$\text{D}^\alpha := \text{D}^{\alpha_1}_x \text{D}^{\alpha_2}_y \text{D}^{\alpha_3}_z$
+za $\alpha = \left(\alpha_1 , \alpha_2 , \alpha_3 \right)$,
+kjer je $\alpha_1,\alpha_2, \alpha_3 \in \mathbb{N}_0$ 
+ter vpeljimo še $|\alpha| := \alpha_1 + \alpha_2 + \alpha_3$.
+
+\begin{proof}
+    Opazimo najprej, da monomi oblike $\{x^i y^j z^k\}_{0 \le i  + j + k \le n}$
+    razpenjanjo $\mathbb{P}_n$, kar sledi direktno it definicije 
+    prostora. Opazimo tudi, da 
+    $|\left(i, j , k\right): 0\le i+j+k \le n , i,j,k \in \mathbb{N}_0| = \binom{n+3}{3} = \dim\mathbb{P}_n$.
+    Pokazati moramo še linearno neodvisnost.  
+
+    Predpostavimo, da je polinom $p(x,y,z) =\sum_{0 \le i  + j + k \le n} a_{ijk} x^i y^j z^k $
+    identično enak 0. Potem so tudi vsi njegovi mešani odvodi identično enaki 0.
+    Poi drugi strani pa z direktnim odvajanjem dobimo
+    $D^i_xD^j_yD^z_k p(x,y,z)|_{x =0 ,y =0, z = 0} = a_{ijk}$ za vsak 
+    $0 \le i  + j + k \le n$. Torej linearna neodvisnost velja, ter
+    je s tem dokazana lema.
+\end{proof}
+
+
+
+\section{Conclusion}
+Summarize the key findings and suggest future work or implications.
+
+% \section*{References}
+% \bibliographystyle{plain}
+% \bibliography{references}
+
+$\left\lVert 3 \right\rVert$ 
+
+
+\end{document}
