@@ -18,6 +18,7 @@
 % Define the definition environment
 \newtheorem{definition}{Definicija}
 \newtheorem{lemma}{Lema}
+\newtheorem{theorem}{Izrek}
 % Define custom environment based on 'proof'
 % \newtheorem{proof}{Dokaz}
 
@@ -53,16 +54,16 @@ razširitev prej omenjenih.
 \section{Prostor polinomov treh spremenljivk} 
 
 \begin{definition}\label{def_prostor}
-    Naj bo $n \in \mathbb{N}_0$. Prostor polinomov treh spremenljivk stopnje $n$ je definiran kot
+    Naj bo $d \in \mathbb{N}_0$. Prostor polinomov treh spremenljivk stopnje $n$ je definiran kot
     \begin{equation}
-        \mathbb{P}_n = \left\{ \sum_{0 \le i  + j + k \le n} a_{ijk} x^i y^j z^k  ; a_{ijk} \in \mathbb{R}\right\}.
+        \mathbb{P}_d = \left\{ \sum_{0 \le i  + j + k \le d} a_{ijk} x^i y^j z^k  ; a_{ijk} \in \mathbb{R}\right\}.
     \end{equation}
 \end{definition}
 
 \begin{lemma}
-    Naj bo $\mathbb{P}_n$ kot v definiciji \ref{def_prostor}.
-    Potem je $\dim \mathbb{P}_n = \binom{n+3}{3} $. 
-    Nadalje monomi $\left\{x^i y^j z^k \right\}_{0 \le i  + j + k \le n}$ tvorijo njegovo bazo.
+    Naj bo $\mathbb{P}_d$ kot v definiciji \ref{def_prostor}.
+    Potem je $\dim \mathbb{P}_d = \binom{d+3}{3} $. 
+    Nadalje monomi $\left\{x^i y^j z^k \right\}_{0 \le i  + j + k \le d}$ tvorijo njegovo bazo.
 \end{lemma}
 
 Preden se lotimo dokaza leme, vpeljimo noticajo odvodov, 
@@ -75,30 +76,131 @@ kjer je $\alpha_1,\alpha_2, \alpha_3 \in \mathbb{N}_0$
 ter vpeljimo še $|\alpha| := \alpha_1 + \alpha_2 + \alpha_3$.
 
 \begin{proof}
-    Opazimo najprej, da monomi oblike $\{x^i y^j z^k\}_{0 \le i  + j + k \le n}$
-    razpenjanjo $\mathbb{P}_n$, kar sledi direktno it definicije 
+    Opazimo najprej, da monomi oblike $\{x^i y^j z^k\}_{0 \le i  + j + k \le d}$
+    razpenjanjo $\mathbb{P}_d$, kar sledi direktno it definicije 
     prostora. Opazimo tudi, da 
-    $|\left(i, j , k\right): 0\le i+j+k \le n , i,j,k \in \mathbb{N}_0| = \binom{n+3}{3} = \dim\mathbb{P}_n$.
+    $|\left(i, j , k\right): 0\le i+j+k \le d , i,j,k \in \mathbb{N}_0| = \binom{d+3}{3} = \dim\mathbb{P}_d$.
     Pokazati moramo še linearno neodvisnost.  
 
-    Predpostavimo, da je polinom $p(x,y,z) =\sum_{0 \le i  + j + k \le n} a_{ijk} x^i y^j z^k $
+    Predpostavimo, da je polinom $p(x,y,z) =\sum_{0 \le i  + j + k \le d} a_{ijk} x^i y^j z^k $
     identično enak 0. Potem so tudi vsi njegovi mešani odvodi identično enaki 0.
-    Poi drugi strani pa z direktnim odvajanjem dobimo
+    Po drugi strani pa z direktnim odvajanjem dobimo
     $D^i_xD^j_yD^z_k p(x,y,z)|_{x =0 ,y =0, z = 0} = a_{ijk}$ za vsak 
-    $0 \le i  + j + k \le n$. Torej linearna neodvisnost velja, ter
+    $0 \le i  + j + k \le d$. Torej linearna neodvisnost velja, ter
     je s tem dokazana lema.
 \end{proof}
 
+V nadaljevanju bomo prestavili drugo bazo prostora $\mathbb{P}_d$, zato 
+nadaljne lastnosti baze monomov ne bomo raziskovali. Za uvedbo Bernsteinovih
+baznih polinomov, potrebujemo uvedbo baricentričnih koordinat glede na 
+tetraeder, kar je vpeljano v naslednjem razdelku.
+
+Pred tem pa pa prestavimo še lemo, ki nam pove, kako oceniti 
+normo polinoma $p \in \mathbb{P}_n$.
+
+\begin{lemma}\label{lema_norma}
+    Naj bo $T$ tetraeder z volumnom $V_T$, potem obstaja 
+    konstanta $K$ odvisna le od $d$, da za vsak  $p \in \mathbb{P}_d$ ter $1 \le q < \infty$
+    \begin{equation}
+        V_T^{-1/q} \left\lVert p \right\rVert_{q,T} \le K \left\lVert p \right\rVert_{\infty l, T} \le K V_T^{-1/q} \left\lVert p \right\rVert_{q,T},
+    \end{equation}
+    kjer je $\left\lVert \dot{} \right\rVert_{q,T}$ standardna $L_q$ norma 
+    glede na tetraeder $T$.
+\end{lemma}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+TODO 
+
+\begin{theorem}
+    TODO
+\end{theorem}
+
+\section{Baricentrične koordinate}
+
+Analogno z ravninskim primerom, želimo tudi 
+v $\mathbb{R}^3$ uvesti stabilnejšo bazo za prostor 
+$\mathbb{P}_d$, ki bo temeljila na Bernsteinovih baznih polinomih,
+za kar moramo najeprej vpeljati baricentrične koordinate glede na
+tetraeder.
+
+\begin{definition}
+    Naj bo $T := \langle V_1 , V_2 , V_3, V_4\rangle$ nedegeneriran tetraeder
+    v $\mathbb{R}^3$. To pomeni, da ima neničelen volumen. Rečemo, da so 
+    vozlišča $V_1 , V_2 , V_3, V_4$ tetraedra $T$ v kanoničnem redu,
+    če rotiramo in transliramo $T$ tako, da ploskev
+    $\langle V_1, V_2, V_3\rangle$ leži v ravnini $z = 0$, je pozitivno
+    orientiran ter je $z$ koordinata vozlišča $V_4$ pozitivna.
+\end{definition}
+
+Od sedaj naprej predpostavimo, da je tetraeder $T = \langle V_1, V_2, V_3,V_4 \rangle$ v kanoničnem redu,
+kjer za vozlišče $V_i$ velja $V_i = (x_i, y_i, z_i)$. Postavimo 
+
+\begin{align}
+    M := \begin{bmatrix}
+        1 & 1 & 1 & 1 \\
+        x_1 & x_2 & x_3 & x_4 \\
+        y_1 & y_2 & y_3 & y_4 \\
+        z_1 & z_2 & z_3 & z_4
+    \end{bmatrix},
+\end{align}
+kjer je znano dejstvo, da velja $\text{det}(M) = 6V_T$, kjer je $V_T$ volumen tetraedra $T$. 
 
 
-\section{Conclusion}
-Summarize the key findings and suggest future work or implications.
+\begin{lemma}\label{lema_baricentricne}
+    Naj bo $T = \langle V_1, V_2, V_3, V_4 \rangle$ tetraeder v kanoničnem redu.
+    Potem za vsako točko $V = (x,y,z) \in \mathbb{R}^3$ obstajajo enolično določene
+     $\phi_1, \phi_2, \phi_3, \phi_4 \in \mathbb{R}$,
+    da velja 
+    \begin{equation}\label{eq_baricentricne}
+        V = \phi_1 V_1 + \phi_2 V_2 + \phi_3 V_3 + \phi_4 V_4
+    \end{equation} ter 
+    \begin{equation}\label{eq_particija}
+        \phi_1 + \phi_2 + \phi_3 + \phi_4 = 1 .
+    \end{equation}
+    Količinam $\phi_1, \ldots, \phi_4$ rečemo baricentrične 
+    koordinate točke $V$ glede na tetraeder $T$.
+\end{lemma}
 
-% \section*{References}
-% \bibliographystyle{plain}
-% \bibliography{references}
+\begin{proof}
+    Enačbi \ref{eq_baricentricne} in \ref{eq_particija} sta ekvivalentni
+    sledečemu nesingularnem sistemu:
+    \begin{align}
+        M \begin{bmatrix}\phi_1 \\ \phi_2 \\ \phi_3 \\ \phi_4 \end{bmatrix} = \begin{bmatrix}
+            1 \\ x \\ y \\ z \end{bmatrix}.
+    \end{align}
+\end{proof}
 
-$\left\lVert 3 \right\rVert$ 
+V dokazu opazimo, da z uporabo Cramerjevega pravila dobimo
+\begin{align}\label{eq_cramer}
+    \phi_1 = \frac{1}{\text{det}(M)}
+    \begin{vmatrix}
+        1 & 1 & 1 & 1 \\
+        x & x_2 & x_3 & x_4 \\
+        y & y_2 & y_3 & y_4 \\
+        z & z_2 & z_3 & z_4
+    \end{vmatrix},
+\end{align}
+kjer bi podobno dobili za $\phi_2, \phi_3, \phi_4$. 
+Opazimo tudi, da lahko $i$-to baricentrično koordinato izračunamo
+kot $\frac{V_{\widetilde{T_i}}}{V_T}$, kjer je $V_{\widetilde{T_i}}$
+prostornina tetraedra, ki ga dobimo, če zamenjamo $i$-to vozlišče
+s točko $V$. 
+Naprej bi z razvojem determinante v izrazu \ref{eq_cramer}
+dokazali naslednjo lemo.
+
+\begin{lemma}
+    Za vsak $i = 1, 2, 3, 4$ je funkcija $\phi_i$ linearni polinom
+    v $x, y, z$, ki doseže vrednost $1$ v oglišču $v_i$ in
+    izgine v vseh točkah na ploskvi tetraedra $T$, ki leži
+    nasproti $v_i$. Poleg tega velja
+    $0 \leq \phi_i \leq 1$, kadar $(x, y, z)$ leži v $T$.
+\end{lemma}
+
+\section{Bernsteinovi bazni polinomi}
+
 
 
 \end{document}
