@@ -181,26 +181,94 @@ V dokazu opazimo, da z uporabo Cramerjevega pravila dobimo
         x & x_2 & x_3 & x_4 \\
         y & y_2 & y_3 & y_4 \\
         z & z_2 & z_3 & z_4
-    \end{vmatrix},
+    \end{vmatrix}.
 \end{align}
-kjer bi podobno dobili za $\phi_2, \phi_3, \phi_4$. 
+Podobno bi dobili za $\phi_2, \phi_3, \phi_4$. 
 Opazimo tudi, da lahko $i$-to baricentrično koordinato izračunamo
 kot $\frac{V_{\widetilde{T_i}}}{V_T}$, kjer je $V_{\widetilde{T_i}}$
 prostornina tetraedra, ki ga dobimo, če zamenjamo $i$-to vozlišče
 s točko $V$. 
-Naprej bi z razvojem determinante v izrazu \ref{eq_cramer}
+Naprej bi z razvojem determinante v izrazu \eqref{eq_cramer}
 dokazali naslednjo lemo.
 
 \begin{lemma}
     Za vsak $i = 1, 2, 3, 4$ je funkcija $\phi_i$ linearni polinom
-    v $x, y, z$, ki doseže vrednost $1$ v oglišču $v_i$ in
+    v $x, y, z$, ki doseže vrednost $1$ v oglišču $V_i$ in
     izgine v vseh točkah na ploskvi tetraedra $T$, ki leži
-    nasproti $v_i$. Poleg tega velja
+    nasproti $V_i$. Poleg tega velja
     $0 \leq \phi_i \leq 1$, kadar $(x, y, z)$ leži v $T$.
 \end{lemma}
 
 \section{Bernsteinovi bazni polinomi}
 
+\begin{definition}
+    Naj bo $T = \langle V_1, V_2, V_3, V_4 \rangle$ tetraeder v kanoničnem redu.
+    Bernsteinov bazni polinom stopnje $n$ glede na tetraeder $T$ je definiran kot
+    \begin{equation}
+        B_{ijkl}^d := \frac{d!}{i!j!k!l!} \phi_1^i \phi_2^j \phi_3^k \phi_4^l, \quad i + j + k + l = d,
+    \end{equation}
+    kjer je $\phi_1, \phi_2, \phi_3, \phi_4$ baricentrične koordinate funkcije
+    glede na tetraeder $T$. V primeru, ko je kateri izmed indeksov $i, j, k, l$ negativen, 
+    nastavimo $B_{ijkl}^d = 0$.
+\end{definition}
+
+\begin{theorem}\label{izrek_bernstein}
+    Bernsteinovi bazni polinomi $B_{ijkl}^d$ tvorijo bazo prostora $\mathbb{P}_d$.
+    Prav tako velja 
+    \begin{equation}
+        \sum_{i+j+k+l = d} B_{ijkl}^d(V) = 1, \quad \forall V \in \mathbb{R}^3     
+    \end{equation}
+    ter
+    \begin{equation}
+        0 \leq B_{ijkl}^d(V) \leq 1, \quad \forall V \in T.
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    TODO
+\end{proof}
+
+Iz izreka \ref{izrek_bernstein} sledi, da lahko vsak polinom $p \in \mathbb{P}_d$
+lahko zapišemo na enoličen način kot
+\begin{equation}\label{eq_Bforma}
+    p = \sum_{i+j+k+l = d} c_{ijkl} B_{ijkl}^d.
+\end{equation}
+Tak zapis imenujemo \textbf{B-forma} ter koeficente $c_{ijkl}$ \textbf{B-koeficienti}.
+Množico domenskih točk definiramo ter označimo kot
+\begin{equation}
+    \mathcal{D}_{d,T} := 
+    \left\{
+        \zeta_{ijkl}^T:= \frac{i V_1 + j V_2 + k V_3 + l V_4}{d}
+     \right\}_{i + j+ k+l = d}.
+\end{equation}
+TODO slika z domenskimi točkami.
+
+Nadalje pripišemo vsaki domenski točki $\zeta_{ijkl}^T$ B-koeficent
+$c_{ijkl}$ za $i +j+k+l = d$. Torej lahko zapišemo B-koeficente kot $\left\{
+    c_{\zeta}
+\right\}_{\zeta \in \mathcal{D}_{d,T}}$ tako da če $\zeta = \zeta_{ijkl}^T$,
+potem je $c_{\zeta} = c_{ijkl}$.
+
+\begin{theorem}
+    Naj bo $p \in \mathbb{P}_d$ zapisan v obliki \eqref{eq_Bforma}. Označimo 
+    z $\text{F}_1 := \langle V2,V_3,V_4 \rangle$ ploskev tetraedra $T$ nasproti vozlišču $V_1$.
+    Potem velja 
+    \begin{equation}
+        p|_{\text{F}_1} = \sum_{j+k+l = d} c_{0jkl}B_{0jkl}^d = 
+            \sum_{j+k+l}c_{jkl}^{\text{F}_1} B_{jkl}^{\text{F}_1,d},
+    \end{equation}
+    kjer $c_{jkl}^{\text{F}_1}:=c_{0jkl}$ ter so $B_{jkl}^{\text{F}_1,d}$
+    Bernsteinovi bazni polinomi stopnje $d$ glede na trikotnik $\text{F}_1$ .
+\end{theorem}
+
+Podobne formule veljajo za ostale ploskve tetraedra $T$.
+
+\begin{proof}
+    Upoštevaje dejstvo, da je $B_{0jkl}^d = 0$ za vsako $V \in \text{F}_1$ (ker je 
+    tam $\phi_1 = 0$), trditev sledi nemudoma.
+\end{proof}
+
+\section{de Castljaujev algoritem}
 
 
 \end{document}
