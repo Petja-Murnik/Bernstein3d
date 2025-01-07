@@ -112,7 +112,7 @@ normo polinoma $p \in \mathbb{P}_n$.
     TODO
 \end{proof}
 
-TODO 
+TODO razmislimo pravzaprav če rabmo to lemo ter dokaz.
 
 \begin{theorem}
     TODO
@@ -215,7 +215,7 @@ dokazali naslednjo lemo.
 \begin{theorem}\label{izrek_bernstein}
     Bernsteinovi bazni polinomi $B_{ijkl}^d$ tvorijo bazo prostora $\mathbb{P}_d$.
     Prav tako velja 
-    \begin{equation}
+    \begin{equation}\label{eq_partcija_enote}
         \sum_{i+j+k+l = d} B_{ijkl}^d(V) = 1, \quad \forall V \in \mathbb{R}^3     
     \end{equation}
     ter
@@ -225,7 +225,65 @@ dokazali naslednjo lemo.
 \end{theorem}
 
 \begin{proof}
-    TODO
+    Označimo z $\mathcal{B}_d := \left\{ B_{ijkl}^d  \right\}_{0\leq i+j+k+l \leq 1}$ množica
+    Bernsteinovih polinomov. 
+
+    Za dokaz enakosti \eqref{eq_partcija_enote} pokažemo, da velja $$1 = \left( \phi_1 + \phi_2 + 
+    \phi_3 + \phi_4  \right)^d = \sum_{i+j+k+l = d} \frac{d!}{i!j!k!l!} 
+    \phi_1^i \phi_2^j \phi_3^k \phi_4^l$$.
+
+    Tu opazimo tudi, da je v $1 \in \text{Lin} \mathcal{B}_d$. Dokaza izjave
+    o bazi prostora, se bomo lotili z induklcijo po $d$. Za $d = 0$ smo pokazali zgoraj. Lotimo
+    se sedaj primera, ko je $d = 1$.
+
+    Če enačbo \eqref{eq_baricentricne} zapišemo kot 
+    \begin{equation}
+        \begin{bmatrix}
+            x \\ y \\ z 
+        \end{bmatrix} = 
+        \phi_1\begin{bmatrix} x_1 \\ y_1 \\ z_1\end{bmatrix} +
+        \phi_2\begin{bmatrix} x_2 \\ y_2 \\ z_2\end{bmatrix} +  
+        \phi_3\begin{bmatrix} x_3 \\ y_3 \\ z_3\end{bmatrix} +
+        \phi_4\begin{bmatrix} x_4 \\ y_4 \\ z_4\end{bmatrix}
+    \end{equation}
+    ter pogledamo le prvo vrstico in upoštevamo $1 = \sum_{i+j+k+l}B_{ijkl}^{d-1}$ računamo
+    $$x = \left(x_1 \phi_1 + x_2 \phi_2 + x_3 \phi_3 +x_4 \phi_4 \right)  \sum_{i+j+k+l = d-1} B_{ijkl}^{d-1} = \star $$
+    Poglejmo posebej prvi člen
+    \begin{align*}
+        x_1 \phi_1 &= x_1 \phi_1 \sum_{i+j+k+l = d-1} B_{ijkl}^{d-1} =  
+            x_1  \sum_{i+j+k+l = d-1} \frac{(d-1)!}{i!j!k!l!} \phi_1^{i+1} \phi_2^j \phi_3^k \phi_4^l 
+            \\ & = \sum_{i = 0}^{d-1} \left(\sum_{j+k+l = d-1-i} x_1 \frac{(d-1)!}{i!j!k!l!} \phi_1^{i+1} \phi_2^j \phi_3^k \phi_4^l \right) = 
+            \\ & = \sum_{\tilde{\imath} = 1}^{d} \left(  \sum_{j+k+l = d-\tilde{\imath}} \frac{x_i \tilde{\imath}}{d} \frac{d!}{\tilde{\imath}! j!k!l!}     \phi_1^{\tilde{\imath}} \phi_2^j \phi_3^k \phi_4^l  \right) = 
+            \\ & = \sum_{\tilde{\imath} = 0}^{d} \left( \sum_{j+k+l = d- \tilde{\imath}} \frac{\tilde{\imath} x_1}{d} B_{\tilde{\imath}jkl}^d\right) = 
+            \sum_{i+j+k+l = d} \frac{i}{d} x_1 B_{ijkl}^d,
+    \end{align*}
+    kjer smo v prehodu na 3. vrstico označili $\tilde{\imath} = i+1$. Združimo vse člene ter 
+    dobimo 
+    \begin{align}
+         \star
+        = \sum_{i+j+k+l = d} \frac{ix_1 + jx_2 + k x_3 +l x_4}{d} B_{ijkl}^d(x,y,z)
+    \end{align}
+    Podobna izraza bi dobili 
+    za spremenljivki $y$ in $z$, s čimer smo torej pokazali, 
+    da izjava velja za $d = 1$ ( saj ulomek tolmačimo kot konsanto 
+    ter je to ravno definicija linearne ogrinjače). Lotimo se sedaj indukcijskega koraka. 
+
+    Naj trditev velja za vse polinome oblike $x^\mu y^\nu z^\kappa$, 
+    kjer $\mu + \nu + \kappa \leq  d-1$. Potem za $\mu + \nu + \kappa =  d$ ter 
+    nek $c_{ijkl}$ velja  
+    \begin{align*}
+        x^\mu y^\nu z^\kappa &= x \left(x^{\mu-1} y^\nu z^\kappa\right) = 
+        \left(x_1 \phi_1 + x_2 \phi_2 + x_3 \phi_3 +x_4 \phi_4 \right) \sum_{i+j+k+l = d-1}c_{ijkl} B_{ijkl}^{d-1}(x,y,z) =
+        \\ & =  x \sum_{i+j+k+l = d}d_{ijkl} B_{ijkl}^{d}(x,y,z)
+        ,
+    \end{align*}
+    kjer je $d_{ijkl}$ dobljen na podoben način kot v primeru $d = 1$. Skupaj z dejstvom, 
+    da je $\text{dim}\left(\mathbb{P}_d \right)=  \binom{d+3}{2}$ enako številu baznih funkcij 
+    v $\mathcal{B}_d$ dokažemo izjavo, da Bernsteinovi bazni polinomi tvorijo 
+    bazo $\mathbb{P}_d$. 
+
+    Izjava o spodnji ter zgornji meji Bernsteinovih baznih funkcij sledi direktno iz
+    lastnosti baricentričnih koordinat.
 \end{proof}
 
 Iz izreka \ref{izrek_bernstein} sledi, da lahko vsak polinom $p \in \mathbb{P}_d$
@@ -251,7 +309,7 @@ potem je $c_{\zeta} = c_{ijkl}$.
 
 \begin{theorem}
     Naj bo $p \in \mathbb{P}_d$ zapisan v obliki \eqref{eq_Bforma}. Označimo 
-    z $\text{F}_1 := \langle V2,V_3,V_4 \rangle$ ploskev tetraedra $T$ nasproti vozlišču $V_1$.
+    z $\text{F}_1 := \langle V_2,V_3,V_4 \rangle$ ploskev tetraedra $T$ nasproti vozlišču $V_1$.
     Potem velja 
     \begin{equation}
         p|_{\text{F}_1} = \sum_{j+k+l = d} c_{0jkl}B_{0jkl}^d = 
@@ -267,6 +325,8 @@ Podobne formule veljajo za ostale ploskve tetraedra $T$.
     Upoštevaje dejstvo, da je $B_{0jkl}^d = 0$ za vsako $V \in \text{F}_1$ (ker je 
     tam $\phi_1 = 0$), trditev sledi nemudoma.
 \end{proof}
+
+TODO stabilnost B forme mogoče nima smisla
 
 \section{de Castljaujev algoritem}
 
