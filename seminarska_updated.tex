@@ -105,24 +105,29 @@ normo polinoma $p \in \mathcal{P}_n$.
     Naj bo $T$ tetraeder z volumnom $V_T$, potem obstaja 
     konstanta $K$ odvisna le od $d$, da za vsak  $p \in \mathcal{P}_d$ ter $1 \le q < \infty$
     \begin{equation}
-        V_T^{-1/q} \left\lVert p \right\rVert_{q,T} \le K \left\lVert p \right\rVert_{\infty l, T} \le K V_T^{-1/q} \left\lVert p \right\rVert_{q,T},
+        V_T^{-1/q} \left\lVert p \right\rVert_{q,T} \le  \left\lVert p \right\rVert_{\infty l, T} \le K V_T^{-1/q} \left\lVert p \right\rVert_{q,T},
     \end{equation}
-    kjer je $\left\lVert \dot{} \right\rVert_{q,T}$ standardna $L_q$ norma 
+    kjer je $\left\lVert \cdot{} \right\rVert_{q,T}$ standardna $L_q$ norma 
     glede na tetraeder $T$.
 \end{lemma}
 
 \begin{proof}
-    Prva neenakost sledi direktno iz Hölderjeve neenakosti, saj je
-    \begin{equation}
-        \left\lVert p \right\rVert_{q,T} \leq V_T^{1/q} \left\lVert p \right\rVert_{\infty, T}.
-    \end{equation}
+    Za prvo neenakost računamo
+    \begin{equation*}
+        \int_{T} |p(t)|^q dt \le 
+        \int_{T} \left( \sup_{t \in T} |p(t)| \right) ^q dt
+        = \left( \sup_{t \in T} |p(t)| \right)^q \int_{T}1dt
+        = \left\lVert p \right\rVert_{\infty , T}^{q} \cdot V_T
+    \end{equation*}
+    ter če začetek in konec $q$-korenimo, dobimo željeno.
+
     Za drugo neenakost pa uporabimo dejstvo, da je $\mathcal{P}_d$ končno dimenzionalen prostor, zato so vse norme ekvivalentne. Torej obstaja konstanta $K$, odvisna le od $d$, da velja
     \begin{equation}
         \left\lVert p \right\rVert_{\infty, T} \leq K \left\lVert p \right\rVert_{q,T}.
     \end{equation}
     Združimo obe neenakosti in dobimo
     \begin{equation}
-        V_T^{-1/q} \left\lVert p \right\rVert_{q,T} \leq K \left\lVert p \right\rVert_{\infty, T} \leq K V_T^{-1/q} \left\lVert p \right\rVert_{q,T}.
+        V_T^{-1/q} \left\lVert p \right\rVert_{q,T} \leq  \left\lVert p \right\rVert_{\infty, T} \leq K V_T^{-1/q} \left\lVert p \right\rVert_{q,T}.
     \end{equation}
     S tem je lema dokazana.
 \end{proof}
