@@ -9,6 +9,10 @@
 \usepackage{tikz}
 \usetikzlibrary{calc,3d}
 
+% % Define the definition environment
+\newtheorem{definition1}{Definicija}
+\newtheorem{lemma1}{Lema}
+\newtheorem{theorem1}{Izrek}
 
 \title{Bernsteinovi polinomi treh spremenljivk}
 \author{Petja Murnik in Nejc Jenko}
@@ -28,25 +32,25 @@
     V tem delu bomo predstavili Bernsteinove bazne polinome treh spremenljivk, ki so razširitev prej omenjenih.
 \end{frame}
 
-\section{Prostor \mathcal{P}_d}
+\section{Prostor $\mathcal{P}_d$}
 \begin{frame}{Definicija prostora polinomov treh spremenljivk}
-    Prostor polinomov stopnje $n$ treh spremenljivk je definiran kot:
+    Prostor polinomov stopnje $d$ treh spremenljivk je definiran kot:
     \[
-    P_n(x, y, z) = \left\{ \sum_{i+j+k \leq n} c_{i,j,k} x^i y^j z^k : c_{i,j,k} \in \mathbb{R} \right\}.
+      \mathcal{P}_d(x, y, z) = \left\{ \sum_{i+j+k \leq n} c_{i,j,k} x^i y^j z^k : c_{i,j,k} \in \mathbb{R} \right\}.
     \]
     Ta prostor ima dimenzijo:
     \[
-    \dim(P_n) = \binom{n+3}{3}.
+        \mathcal{P}_d = \binom{d+3}{3}.
     \]
 \end{frame}
 
 
 \begin{frame}{Lema 1}
-\begin{lemma}
+\begin{lemma1}
     Naj bo $\mathcal{P}_d$ definiran kot v prej.
     Potem velja, da je $\dim \mathcal{P}_d = \binom{d+3}{3} $. \\
     Nadalje monomi $\left\{x^i y^j z^k \right\}_{0 \le i  + j + k \le d}$ tvorijo njegovo bazo.
-\end{lemma}
+\end{lemma1}
 \end{frame}
 
 
@@ -63,7 +67,7 @@
 
 
 \begin{frame}{Lema 2}
-\begin{lemma}\label{lema_norma}
+\begin{lemma1}\label{lema_norma}
     Naj bo $T$ tetraeder z volumnom $V_T$, potem obstaja 
     konstanta $K$ odvisna le od $d$, da za vsak  $p \in \mathcal{P}_d$ ter $1 \le q < \infty$
     \begin{equation}
@@ -71,7 +75,7 @@
     \end{equation}
     kjer je $\left\lVert \dot{} \right\rVert_{q,T}$ standardna $L_q$ norma 
     glede na tetraeder $T$.
-\end{lemma}
+\end{lemma1}
 \end{frame}
 
 
@@ -96,17 +100,17 @@
     S tem je lema dokazana.
 \end{frame}
 
-\section{Baricentrične koordinate}
+\section{Baricentrične koordinate glede na tetraeder}
 \begin{frame}{Definicija nedegeneriranega tetraedra}
- \begin{definition}
+ \begin{definition1}
     Rečemo, da je tetraeder $T = \langle V_1, V_2, V_3, V_4 \rangle$ \textbf{nedegeneriran}, če ima neničelen volumen. Rečemo, da so vozlišča $V_1 , V_2 , V_3, V_4$ tetraedra $T$ v \textbf{kanoničnem redu}, če lahko $T$ rotiramo in transliramo  tako, da ploskev $\langle V_1, V_2, V_3\rangle$ leži v ravnini $z = 0$ in je pozitivno orientirana ter je $z$ koordinata vozlišča $V_4$ pozitivna.
-\end{definition}
+\end{definition1}
 \end{frame}
 
 
 
 \begin{frame}{Lema 3}
-\begin{lemma}\label{lema_baricentricne}
+\begin{lemma1}\label{lema_baricentricne}
     Naj bo $T = \langle V_1, V_2, V_3, V_4 \rangle$ tetraeder v kanoničnem redu.
     Potem za vsako točko $V = (x,y,z) \in \mathbb{R}^3$ obstajajo enolično določene
      $\phi_1, \phi_2, \phi_3, \phi_4 \in \mathbb{R}$,
@@ -119,7 +123,7 @@
     \end{equation}
     Vrednostim $\phi_1, \phi_2, \phi_3, \phi_4$ rečemo \textbf{baricentrične 
     koordinate} točke $V$ glede na tetraeder $T$.
-\end{lemma}
+\end{lemma1}
 \end{frame}
 
 \begin{frame}{Dokaz leme 3}
@@ -151,7 +155,7 @@
     s točko $V$.
 \end{frame}
 
-\begin{frame}{Baricentrične}
+\begin{frame}{Baricentrične koordinate glede na tetraeder}
     \centering
     \begin{tikzpicture}[scale=3, z={(0.4cm,0.4cm)}] 
         % Define vertices of the tetrahedron
@@ -204,7 +208,7 @@
 % Definicija Bernsteinovih baznih polinomov
 \section{Bernsteinovi bazni polinomi}
 \begin{frame}{Definicija Bernsteinovih baznih polinomov}
-\begin{definition}
+\begin{definition1}
     Naj bo $T = \langle V_1, V_2, V_3, V_4 \rangle$ tetraeder v kanoničnem redu.
     \textbf{Bernsteinov bazni polinom} stopnje $n$ glede na tetraeder $T$ je definiran kot
     \begin{equation}
@@ -213,12 +217,12 @@
     kjer je $\phi_1, \phi_2, \phi_3, \phi_4$ baricentrične koordinate funkcije
     glede na tetraeder $T$. V primeru, ko je kateri izmed indeksov $i, j, k, l$ negativen, 
     nastavimo $B_{ijkl}^d = 0$.
-\end{definition}
+\end{definition1}
     Ključne lastnosti: nenegativnost, particija enote.
 \end{frame}
 
 \begin{frame}{Izrek 2}
-\begin{theorem}\label{izrek_bernstein}
+\begin{theorem1}\label{izrek_bernstein}
     Bernsteinovi bazni polinomi $B_{ijkl}^d$ tvorijo bazo prostora $\mathcal{P}_d$.
     Prav tako velja 
     \begin{equation}\label{eq_partcija_enote}
@@ -228,7 +232,7 @@
     \begin{equation}
         0 \leq B_{ijkl}^d(V) \leq 1, \quad \forall V \in T.
     \end{equation}
-\end{theorem}
+\end{theorem1}
 \end{frame}
 
 \begin{frame}{Povzetek dokaza}
@@ -276,7 +280,7 @@ Množico domenskih točk definiramo ter označimo kot
 \end{equation}
 \end{frame}
 
-\begin{frame}{Kontrolne ročke}
+\begin{frame}{Domenske točke $\mathcal{D}_{3,T}$}
     \centering
     \begin{tikzpicture}[scale=3, z={(0.6cm,2cm)}] 
         % Define vertices of the tetrahedron
@@ -300,115 +304,114 @@ Množico domenskih točk definiramo ter označimo kot
         \filldraw[black] (V_4) circle (1pt) node[right] {$V_4$};
 
 
-        % \coordinate (V_0_0_3) at (0.0, 0.0, 1.0);
-        % \filldraw[red,] (V_0_0_3) circle (0.7pt);
-        % \coordinate (V_0_0_3) at (0.0, 0.0, 1.0);
-        % \filldraw[red,] (V_0_0_3) circle (0.7pt);
-        % \coordinate (V_0_0_3) at (0.0, 0.0, 1.0);
-        % \filldraw[red,] (V_0_0_3) circle (0.7pt);
-        % \coordinate (V_0_0_3) at (0.0, 0.0, 1.0);
-        % \filldraw[red,] (V_0_0_3) circle (0.7pt);
-        % \coordinate (V_0_0_2) at (0.3333333333333333, 0.3333333333333333, 0.6666666666666666);
-        % \filldraw[red,] (V_0_0_2) circle (0.7pt);
-        % \coordinate (V_0_0_2) at (0.3333333333333333, 0.3333333333333333, 0.6666666666666666);
-        % \filldraw[red,] (V_0_0_2) circle (0.7pt);
-        % \coordinate (V_0_0_2) at (0.3333333333333333, 0.3333333333333333, 0.6666666666666666);
-        % \filldraw[red,] (V_0_0_2) circle (0.7pt);
-        % \coordinate (V_0_0_1) at (0.6666666666666666, 0.6666666666666666, 0.3333333333333333);
-        % \filldraw[red,] (V_0_0_1) circle (0.7pt);
-        % \coordinate (V_0_0_1) at (0.6666666666666666, 0.6666666666666666, 0.3333333333333333);
-        % \filldraw[red,] (V_0_0_1) circle (0.7pt);
-        % \coordinate (V_0_0_0) at (1.0, 1.0, 0.0);
-        % \filldraw[red,] (V_0_0_0) circle (0.7pt);
-        % \coordinate (V_0_1_2) at (0.0, 0.3333333333333333, 0.6666666666666666);
-        % \filldraw[red,] (V_0_1_2) circle (0.7pt);
-        % \coordinate (V_0_1_2) at (0.0, 0.3333333333333333, 0.6666666666666666);
-        % \filldraw[red,] (V_0_1_2) circle (0.7pt);
-        % \coordinate (V_0_1_2) at (0.0, 0.3333333333333333, 0.6666666666666666);
-        % \filldraw[red,] (V_0_1_2) circle (0.7pt);
-        % \coordinate (V_0_1_1) at (0.3333333333333333, 0.6666666666666666, 0.3333333333333333);
-        % \filldraw[red,] (V_0_1_1) circle (0.7pt);
-        % \coordinate (V_0_1_1) at (0.3333333333333333, 0.6666666666666666, 0.3333333333333333);
-        % \filldraw[red,] (V_0_1_1) circle (0.7pt);
-        % \coordinate (V_0_1_0) at (0.6666666666666666, 1.0, 0.0);
-        % \filldraw[red,] (V_0_1_0) circle (0.7pt);
-        % \coordinate (V_0_2_1) at (0.0, 0.6666666666666666, 0.3333333333333333);
-        % \filldraw[red,] (V_0_2_1) circle (0.7pt);
-        % \coordinate (V_0_2_1) at (0.0, 0.6666666666666666, 0.3333333333333333);
-        % \filldraw[red,] (V_0_2_1) circle (0.7pt);
-        % \coordinate (V_0_2_0) at (0.3333333333333333, 1.0, 0.0);
-        % \filldraw[red,] (V_0_2_0) circle (0.7pt);
-        % \coordinate (V_0_3_0) at (0.0, 1.0, 0.0);
-        % \filldraw[red,] (V_0_3_0) circle (0.7pt);
-        % \coordinate (V_1_0_2) at (0.0, 0.0, 0.6666666666666666);
-        % \filldraw[red,] (V_1_0_2) circle (0.7pt);
-        % \coordinate (V_1_0_2) at (0.0, 0.0, 0.6666666666666666);
-        % \filldraw[red,] (V_1_0_2) circle (0.7pt);
-        % \coordinate (V_1_0_2) at (0.0, 0.0, 0.6666666666666666);
-        % \filldraw[red,] (V_1_0_2) circle (0.7pt);
-        % \coordinate (V_1_0_1) at (0.3333333333333333, 0.3333333333333333, 0.3333333333333333);
-        % \filldraw[red,] (V_1_0_1) circle (0.7pt);
-        % \coordinate (V_1_0_1) at (0.3333333333333333, 0.3333333333333333, 0.3333333333333333);
-        % \filldraw[red,] (V_1_0_1) circle (0.7pt);
-        % \coordinate (V_1_0_0) at (0.6666666666666666, 0.6666666666666666, 0.0);
-        % \filldraw[red,] (V_1_0_0) circle (0.7pt);
-        % \coordinate (V_1_1_1) at (0.0, 0.3333333333333333, 0.3333333333333333);
-        % \filldraw[red,] (V_1_1_1) circle (0.7pt);
-        % \coordinate (V_1_1_1) at (0.0, 0.3333333333333333, 0.3333333333333333);
-        % \filldraw[red,] (V_1_1_1) circle (0.7pt);
-        % \coordinate (V_1_1_0) at (0.3333333333333333, 0.6666666666666666, 0.0);
-        % \filldraw[red,] (V_1_1_0) circle (0.7pt);
-        % \coordinate (V_1_2_0) at (0.0, 0.6666666666666666, 0.0);
-        % \filldraw[red,] (V_1_2_0) circle (0.7pt);
-        % \coordinate (V_2_0_1) at (0.0, 0.0, 0.3333333333333333);
-        % \filldraw[red,] (V_2_0_1) circle (0.7pt);
-        % \coordinate (V_2_0_1) at (0.0, 0.0, 0.3333333333333333);
-        % \filldraw[red,] (V_2_0_1) circle (0.7pt);
-        % \coordinate (V_2_0_0) at (0.3333333333333333, 0.3333333333333333, 0.0);
-        % \filldraw[red,] (V_2_0_0) circle (0.7pt);
-        % \coordinate (V_2_1_0) at (0.0, 0.3333333333333333, 0.0);
-        % \filldraw[red,] (V_2_1_0) circle (0.7pt);
-        % \coordinate (V_3_0_0) at (0.0, 0.0, 0.0);
-        % \filldraw[red,] (V_3_0_0) circle (0.7pt);
-
-        \coordinate (V_0_0_2) at (0.0, 0.0, 1.0);
+        \coordinate (V_0_0_3) at (0.0, 0.0, 1.0);
+        \filldraw[red,] (V_0_0_3) circle (0.7pt);
+        \coordinate (V_0_0_3) at (0.0, 0.0, 1.0);
+        \filldraw[red,] (V_0_0_3) circle (0.7pt);
+        \coordinate (V_0_0_3) at (0.0, 0.0, 1.0);
+        \filldraw[red,] (V_0_0_3) circle (0.7pt);
+        \coordinate (V_0_0_3) at (0.0, 0.0, 1.0);
+        \filldraw[red,] (V_0_0_3) circle (0.7pt);
+        \coordinate (V_0_0_2) at (0.3333333333333333, 0.3333333333333333, 0.6666666666666666);
         \filldraw[red,] (V_0_0_2) circle (0.7pt);
-        \coordinate (V_0_0_2) at (0.0, 0.0, 1.0);
+        \coordinate (V_0_0_2) at (0.3333333333333333, 0.3333333333333333, 0.6666666666666666);
         \filldraw[red,] (V_0_0_2) circle (0.7pt);
-        \coordinate (V_0_0_2) at (0.0, 0.0, 1.0);
+        \coordinate (V_0_0_2) at (0.3333333333333333, 0.3333333333333333, 0.6666666666666666);
         \filldraw[red,] (V_0_0_2) circle (0.7pt);
-        \coordinate (V_0_0_1) at (0.5, 0.5, 0.5);
+        \coordinate (V_0_0_1) at (0.6666666666666666, 0.6666666666666666, 0.3333333333333333);
         \filldraw[red,] (V_0_0_1) circle (0.7pt);
-        \coordinate (V_0_0_1) at (0.5, 0.5, 0.5);
+        \coordinate (V_0_0_1) at (0.6666666666666666, 0.6666666666666666, 0.3333333333333333);
         \filldraw[red,] (V_0_0_1) circle (0.7pt);
         \coordinate (V_0_0_0) at (1.0, 1.0, 0.0);
         \filldraw[red,] (V_0_0_0) circle (0.7pt);
-        \coordinate (V_0_1_1) at (0.0, 0.5, 0.5);
+        \coordinate (V_0_1_2) at (0.0, 0.3333333333333333, 0.6666666666666666);
+        \filldraw[red,] (V_0_1_2) circle (0.7pt);
+        \coordinate (V_0_1_2) at (0.0, 0.3333333333333333, 0.6666666666666666);
+        \filldraw[red,] (V_0_1_2) circle (0.7pt);
+        \coordinate (V_0_1_2) at (0.0, 0.3333333333333333, 0.6666666666666666);
+        \filldraw[red,] (V_0_1_2) circle (0.7pt);
+        \coordinate (V_0_1_1) at (0.3333333333333333, 0.6666666666666666, 0.3333333333333333);
         \filldraw[red,] (V_0_1_1) circle (0.7pt);
-        \coordinate (V_0_1_1) at (0.0, 0.5, 0.5);
+        \coordinate (V_0_1_1) at (0.3333333333333333, 0.6666666666666666, 0.3333333333333333);
         \filldraw[red,] (V_0_1_1) circle (0.7pt);
-        \coordinate (V_0_1_0) at (0.5, 1.0, 0.0);
+        \coordinate (V_0_1_0) at (0.6666666666666666, 1.0, 0.0);
         \filldraw[red,] (V_0_1_0) circle (0.7pt);
-        \coordinate (V_0_2_0) at (0.0, 1.0, 0.0);
+        \coordinate (V_0_2_1) at (0.0, 0.6666666666666666, 0.3333333333333333);
+        \filldraw[red,] (V_0_2_1) circle (0.7pt);
+        \coordinate (V_0_2_1) at (0.0, 0.6666666666666666, 0.3333333333333333);
+        \filldraw[red,] (V_0_2_1) circle (0.7pt);
+        \coordinate (V_0_2_0) at (0.3333333333333333, 1.0, 0.0);
         \filldraw[red,] (V_0_2_0) circle (0.7pt);
-        \coordinate (V_1_0_1) at (0.0, 0.0, 0.5);
+        \coordinate (V_0_3_0) at (0.0, 1.0, 0.0);
+        \filldraw[red,] (V_0_3_0) circle (0.7pt);
+        \coordinate (V_1_0_2) at (0.0, 0.0, 0.6666666666666666);
+        \filldraw[red,] (V_1_0_2) circle (0.7pt);
+        \coordinate (V_1_0_2) at (0.0, 0.0, 0.6666666666666666);
+        \filldraw[red,] (V_1_0_2) circle (0.7pt);
+        \coordinate (V_1_0_2) at (0.0, 0.0, 0.6666666666666666);
+        \filldraw[red,] (V_1_0_2) circle (0.7pt);
+        \coordinate (V_1_0_1) at (0.3333333333333333, 0.3333333333333333, 0.3333333333333333);
         \filldraw[red,] (V_1_0_1) circle (0.7pt);
-        \coordinate (V_1_0_1) at (0.0, 0.0, 0.5);
+        \coordinate (V_1_0_1) at (0.3333333333333333, 0.3333333333333333, 0.3333333333333333);
         \filldraw[red,] (V_1_0_1) circle (0.7pt);
-        \coordinate (V_1_0_0) at (0.5, 0.5, 0.0);
+        \coordinate (V_1_0_0) at (0.6666666666666666, 0.6666666666666666, 0.0);
         \filldraw[red,] (V_1_0_0) circle (0.7pt);
-        \coordinate (V_1_1_0) at (0.0, 0.5, 0.0);
+        \coordinate (V_1_1_1) at (0.0, 0.3333333333333333, 0.3333333333333333);
+        \filldraw[red,] (V_1_1_1) circle (0.7pt);
+        \coordinate (V_1_1_1) at (0.0, 0.3333333333333333, 0.3333333333333333);
+        \filldraw[red,] (V_1_1_1) circle (0.7pt);
+        \coordinate (V_1_1_0) at (0.3333333333333333, 0.6666666666666666, 0.0);
         \filldraw[red,] (V_1_1_0) circle (0.7pt);
-        \coordinate (V_2_0_0) at (0.0, 0.0, 0.0);
+        \coordinate (V_1_2_0) at (0.0, 0.6666666666666666, 0.0);
+        \filldraw[red,] (V_1_2_0) circle (0.7pt);
+        \coordinate (V_2_0_1) at (0.0, 0.0, 0.3333333333333333);
+        \filldraw[red,] (V_2_0_1) circle (0.7pt);
+        \coordinate (V_2_0_1) at (0.0, 0.0, 0.3333333333333333);
+        \filldraw[red,] (V_2_0_1) circle (0.7pt);
+        \coordinate (V_2_0_0) at (0.3333333333333333, 0.3333333333333333, 0.0);
         \filldraw[red,] (V_2_0_0) circle (0.7pt);
+        \coordinate (V_2_1_0) at (0.0, 0.3333333333333333, 0.0);
+        \filldraw[red,] (V_2_1_0) circle (0.7pt);
+        \coordinate (V_3_0_0) at (0.0, 0.0, 0.0);
+        \filldraw[red,] (V_3_0_0) circle (0.7pt);
 
-
+        % \coordinate (V_0_0_2) at (0.0, 0.0, 1.0);
+        % \filldraw[red,] (V_0_0_2) circle (0.7pt);
+        % \coordinate (V_0_0_2) at (0.0, 0.0, 1.0);
+        % \filldraw[red,] (V_0_0_2) circle (0.7pt);
+        % \coordinate (V_0_0_2) at (0.0, 0.0, 1.0);
+        % \filldraw[red,] (V_0_0_2) circle (0.7pt);
+        % \coordinate (V_0_0_1) at (0.5, 0.5, 0.5);
+        % \filldraw[red,] (V_0_0_1) circle (0.7pt);
+        % \coordinate (V_0_0_1) at (0.5, 0.5, 0.5);
+        % \filldraw[red,] (V_0_0_1) circle (0.7pt);
+        % \coordinate (V_0_0_0) at (1.0, 1.0, 0.0);
+        % \filldraw[red,] (V_0_0_0) circle (0.7pt);
+        % \coordinate (V_0_1_1) at (0.0, 0.5, 0.5);
+        % \filldraw[red,] (V_0_1_1) circle (0.7pt);
+        % \coordinate (V_0_1_1) at (0.0, 0.5, 0.5);
+        % \filldraw[red,] (V_0_1_1) circle (0.7pt);
+        % \coordinate (V_0_1_0) at (0.5, 1.0, 0.0);
+        % \filldraw[red,] (V_0_1_0) circle (0.7pt);
+        % \coordinate (V_0_2_0) at (0.0, 1.0, 0.0);
+        % \filldraw[red,] (V_0_2_0) circle (0.7pt);
+        % \coordinate (V_1_0_1) at (0.0, 0.0, 0.5);
+        % \filldraw[red,] (V_1_0_1) circle (0.7pt);
+        % \coordinate (V_1_0_1) at (0.0, 0.0, 0.5);
+        % \filldraw[red,] (V_1_0_1) circle (0.7pt);
+        % \coordinate (V_1_0_0) at (0.5, 0.5, 0.0);
+        % \filldraw[red,] (V_1_0_0) circle (0.7pt);
+        % \coordinate (V_1_1_0) at (0.0, 0.5, 0.0);
+        % \filldraw[red,] (V_1_1_0) circle (0.7pt);
+        % \coordinate (V_2_0_0) at (0.0, 0.0, 0.0);
+        % \filldraw[red,] (V_2_0_0) circle (0.7pt);
     \end{tikzpicture}
+    $V_1 = (0, 0, 0), V_2 =(0,1, 0), V_3 = (1,1,0), V_4 = (0,0,1) $
 \end{frame}
 
 
 \begin{frame}{Izrek 3}
-\begin{theorem}
+\begin{theorem1}
     Naj bo $p \in \mathcal{P}_d$ zapisan v obliki \eqref{eq_Bforma}. Označimo 
     z $\text{F}_1 := \langle V_2,V_3,V_4 \rangle$ ploskev tetraedra $T$ nasproti vozlišču $V_1$.
     Potem velja 
@@ -418,7 +421,7 @@ Množico domenskih točk definiramo ter označimo kot
     \end{equation}
     kjer $c_{jkl}^{\text{F}_1}:=c_{0jkl}$ ter so $B_{jkl}^{\text{F}_1,d}$
     Bernsteinovi bazni polinomi stopnje $d$ glede na trikotnik $\text{F}_1$ .
-\end{theorem}
+\end{theorem1}
 \end{frame}
 
 % De Casteljaujev algoritem
@@ -433,7 +436,7 @@ V tem razdelku bomo predstavili de Casteljaujev algoritem. Algoritem omogoča u�
 
 
 \begin{frame}{Izrek 4}
-\begin{theorem}
+\begin{theorem1}
     Naj bo $p \in \mathcal{P}_d$ zapisan v obliki B-forme \eqref{eq_Bforma}. Njegove koeficiente označimo z $c_{ijkl}^{(0)} = c_{ijkl}, i+j+l+k = d$.
     Naj ima točka $V$ baricentrične koordinate $\phi_1, \phi_2, \phi_3, \phi_4$.
 
@@ -447,7 +450,7 @@ V tem razdelku bomo predstavili de Casteljaujev algoritem. Algoritem omogoča u�
         c_{ijkl}^{(r)} = \phi_1 c_{i-1,j,k,l}^{(r-1)} + \phi_2 c_{i,j-1,k,l}^{(r-1)} + \phi_3 c_{i,j,k-1,l}^{(r-1)} + \phi_4 c_{i,j,k,l-1}^{(r-1)},
     \end{align*}
     za i+j+k+l = d, r = 1, 2, \ldots, d.
-\end{theorem}
+\end{theorem1}
 \end{frame}
 
 
