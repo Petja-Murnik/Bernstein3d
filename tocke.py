@@ -19,6 +19,6 @@ for ix in range(d+1):
                 coordinate_string = f"\\coordinate (V_{ix}_{iy}_{il}) at ({tocka[0]}, {tocka[1]}, {tocka[2]});"
                 print(coordinate_string)
 
-                coordinate_string = f"\\filldraw[red,] (V_{ix}_{iy}_{il}) circle (0.7pt);"
+                coordinate_string = f"\\filldraw[blue,] (V_{ix}_{iy}_{il}) circle (0.7pt);"
                 print(coordinate_string)
 
