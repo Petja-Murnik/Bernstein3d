@@ -15,6 +15,8 @@
 \usepackage{caption}
 \usepackage{cite}
 \usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tikz-3dplot}
 \usepackage{subcaption} % Required for subfigures
 
 
@@ -237,6 +239,13 @@ dokazali naslednjo lemo.
     glede na tetraeder $T$. V primeru, ko je kateri izmed indeksov $i, j, k, l$ negativen, 
     nastavimo $B_{ijkl}^d = 0$.
 \end{definition}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bernstein_d1.png}
+    \caption{Bernsteinovi polinomi stopnje 1 v treh spremenljivkah.}
+    \label{fig:bernstein}
+\end{figure}
 
 \begin{theorem}\label{izrek_bernstein}
     Bernsteinovi bazni polinomi $B_{ijkl}^d$ tvorijo bazo prostora $\mathcal{P}_d$.
@@ -500,6 +509,8 @@ $c_{ijkl}$ za $i +j+k+l = d$. Torej lahko zapišemo B-koeficente kot $\left\{
 \right\}_{\zeta \in \mathcal{D}_{d,T}}$ tako da če $\zeta = \zeta_{ijkl}^T$,
 potem je $c_{\zeta} = c_{ijkl}$.
 
+Iz izreka \ref{izrek_bernstein} sledi, da za shranjevanje polinoma $p \in \mathcal{P}_d$ zapisanega v B-formi potrebujemo samo vektor B-koeficientov $c$ ter domenske točke $\mathcal{D}_{d,T}$. Iz te ugotovitve bo kasneje sledil tudi de Casteljaujev algoritem.
+
 \begin{theorem}
     Naj bo $p \in \mathcal{P}_d$ zapisan v obliki B-forme \eqref{eq_Bforma}. Označimo 
     z $\text{F}_1 := \langle V_2,V_3,V_4 \rangle$ ploskev tetraedra $T$ nasproti vozlišču $V_1$.
@@ -541,12 +552,12 @@ V tem razdelku bomo predstavili de Casteljaujev algoritem. Algoritem omogoča u�
 \end{align*}
 
 \begin{theorem}
-    Naj bo $p \in \mathcal{P}_d$ zapisan v obliki B-forme \eqref{eq_Bforma}. Njegove koeficiente označimo z $c_{ijkl}^{(0)} = c_{ijkl}, i+j+l+k = d$.
+    Naj bo $p \in \mathcal{P}_d$ polinom treh spremenljivk zapisan v obliki B-forme \eqref{eq_Bforma}. Njegove koeficiente označimo z $c_{ijkl}^{(0)} = c_{ijkl}, i+j+l+k = d$.
     Naj ima točka $V$ baricentrične koordinate $\phi_1, \phi_2, \phi_3, \phi_4$.
 
     Potem velja:
     $$
-    p(V) = \sum_{i+j+k+l = d} c_{ijkl}^{(d)} B_{ijkl}^d(V),
+    p(V) = \sum_{i+j+k+l = d-r} c_{ijkl}^{(r)} B_{ijkl}^{d-m}(V),
     $$
 
     kjer so  $c_{ijkl}^{(r)}$ definirani kot:
@@ -556,6 +567,11 @@ V tem razdelku bomo predstavili de Casteljaujev algoritem. Algoritem omogoča u�
     za i+j+k+l = d, r = 1, 2, \ldots, d.
 \end{theorem}
 
+\begin{proof}
+    Dokaz izreka sledi iz definicije B-forme in rekurzivne zveze za Bernsteinove bazne polinome.
+\end{proof}
+
+
 Direktno iz tega izreka sledi želeni algoritem.
 
 \begin{algorithm}{(de Casteljaujev algoritem)}
@@ -563,17 +579,86 @@ Direktno iz tega izreka sledi želeni algoritem.
         \item Za $r = 0$ nastavi $c_{ijkl}^{(0)} = c_{ijkl}$ za $i+j+k+l = d$.
         \item Za $r = 1, 2, \ldots, d$ izračunaj
         \begin{align*}
-            c_{ijkl}^{(r)} = \phi_1 c_{i-1,j,k,l}^{(r-1)} + \phi_2 c_{i,j-1,k,l}^{(r-1)} + \phi_3 c_{i,j,k-1,l}^{(r-1)} + \phi_4 c_{i,j,k,l-1}^{(r-1)},
+            c_{ijkl}^{(r)} = \phi_1 c_{i+1,j,k,l}^{(r-1)} + \phi_2 c_{i,j+1,k,l}^{(r-1)} + \phi_3 c_{i,j,k+1,l}^{(r-1)} + \phi_4 c_{i,j,k,l+1}^{(r-1)},
         \end{align*}
-        za $i+j+k+l = d$.
+        za $i+j+k+l = d-r$.
         \item Vrednost polinoma $p$ v točki $V$ je enaka
         \begin{align*}
-            p(V) = \sum_{i+j+k+l = d} c_{ijkl}^{(d)} B_{ijkl}^d(V).
+            p(V) = c_{0000}^{(d)}.
         \end{align*}
     \end{enumerate}
 \end{algorithm}
 
+Idejo algoritma prikažemo na spodnji sliki \ref{fig:decasteljau} za $d = 2$.
+\begin{figure}[h]
+
+\begin{tikzpicture}[scale=1.5, line join=round, line cap=round]
+
+    % First tetrahedron coordinates (rotated)
+    \coordinate (A) at (0, 0);
+    \coordinate (B) at ({2*cos(10)}, {2*sin(20)});
+    \coordinate (C) at ({1*cos(10)}, {1*sin(20) + 1.732});
+    \coordinate (D) at ({1*cos(10)}, {1*sin(20) + 2.5});
+    
+    % Points on edges
+    \coordinate (AD1) at ($(A)!0.5!(D)$);
+    \coordinate (BD1) at ($(B)!0.5!(D)$);
+    \coordinate (CD1) at ($(C)!0.5!(D)$);
+    
+    % Draw first tetrahedron
+    \draw[thick] (A) -- (B) -- (C) -- cycle; % Base triangle
+    \draw[thick] (A) -- (D) -- (B); % Side edges
+    \draw[thick] (C) -- (D);
+    
+    % Dotted lines
+    \draw[dotted] (AD1) -- (BD1) -- (CD1) -- cycle;
+    
+    % Mark all vertices and points
+    \foreach \point in {A, B, C, D, AD1, BD1, CD1} {
+        \fill[black] (\point) circle (1.5pt);
+    }
+    
+    % Arrow to second step
+    \draw[->, thick] (2.5, 1.5) -- (3.5, 1.5);
+    
+    % Second tetrahedron coordinates (rotated, scaled down, and moved up)
+    \coordinate (A2) at (4, 0.5);
+    \coordinate (B2) at ({4 + cos(10)}, {0.5 + sin(20)});
+    \coordinate (C2) at ({4 + 0.5*cos(10)}, {0.5 + 0.5*sin(20) + 0.866});
+    \coordinate (D2) at ({4 + 0.5*cos(10)}, {0.5 + 0.5*sin(20) + 1.25});
+    
+    % Draw second tetrahedron
+    \draw[thick] (A2) -- (B2) -- (C2) -- cycle;
+    \draw[thick] (A2) -- (D2) -- (B2);
+    \draw[thick] (C2) -- (D2);
+    
+    % Mark all vertices
+    \foreach \point in {A2, B2, C2, D2} {
+        \fill[black] (\point) circle (1.5pt);
+    }
+    
+    % Arrow to final step
+    \draw[->, thick] (5.8, 1.5) -- (6.8, 1.5);
+    
+    % Final point
+    \fill[black] (7.2, 1.5) circle (1.5pt);
+    
+    \end{tikzpicture}
+    \caption{Vizualni prikaz de Casteljaujevega algoritma.}
+\label{fig:decasteljau}
+\end{figure}
+
 \section{Zaključek}
+
+V tej seminarski nalogi smo raziskali Bernsteinove bazne polinome treh spremenljivk in njihovo uporabo. Začeli smo z matematično definicijo prostora polinomov treh spremenljivk in razširitvijo pojma Bernsteinovih baznih polinomov iz dveh na tri dimenzije. Predstavili smo njihove lastnosti, kot sta pozitivnost in lastnost particije enote, ter dokazali, da tvorijo bazo prostora polinomov dane stopnje.
+
+Razvili smo tudi baricentrične koordinate, ki so ključne za definicijo Bernsteinovih polinomov v tridimenzionalnem prostoru. Poudarili smo njihove geometrijske lastnosti in povezavo z volumni tetraedra. Prav tako smo podali metodo za oceno norm polinomov v tem prostoru, kar je pomembno za analizo stabilnosti in natančnosti numeričnih algoritmov.
+
+Nazadnje smo podrobno obravnavali de Casteljaujev algoritem, ki omogoča stabilno in učinkovito izračunavanje vrednosti polinomov v B-formi. 
+
+V praksi imajo Bernsteinovi bazni polinomi treh spremenljivk širok spekter uporabnosti, predvsem v računalniški grafiki, geometrijskem modeliranju in numerični analizi. Poleg tega predstavljajo temelj za nadaljnje razširitve v višje dimenzije.
+
+
 
 
 
